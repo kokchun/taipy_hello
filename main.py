@@ -3,6 +3,7 @@ from pathlib import Path
 import duckdb
 from taipy.gui import Gui
 import taipy.gui.builder as tgb
+import os
 
 GRAY_1 = "rgb(74, 85, 101)"
 GRAY_2 = "rgb(153, 161, 175)"
@@ -69,6 +70,8 @@ chart_config = {
 }
 
 
+port = int(os.environ.get("PORT", 8080))
+
 with tgb.Page() as page:
     with tgb.part(class_name="container card"):
         tgb.text("# Line chart with tgb.chart()", mode="md")
@@ -90,4 +93,4 @@ with tgb.Page() as page:
 
 
 if __name__ == "__main__":
-    Gui(page=page).run(port=8000, use_reloader=True, dark_mode=False)
+    Gui(page=page).run(host="0.0.0.0", port=port, use_reloader=True, dark_mode=False)
