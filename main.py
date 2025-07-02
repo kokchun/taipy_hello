@@ -70,7 +70,7 @@ chart_config = {
 }
 
 
-port = int(os.environ.get("PORT", 8080))
+port = int(os.environ.get("PORT", 8000))
 
 with tgb.Page() as page:
     with tgb.part(class_name="container card"):
