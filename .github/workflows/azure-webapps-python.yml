@@ -38,7 +38,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python version
+      {# - name: Set up Python version
         uses: actions/setup-python@v3.0.0
         with:
           python-version: ${{ env.PYTHON_VERSION }}
@@ -52,7 +52,7 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
+      # Optional: Add step to run tests here (PyTest, Django test suites, etc.) #}
 
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v4
@@ -60,7 +60,7 @@ jobs:
           name: python-app
           path: |
             .
-            !venv/
+            !.git/*
 
   deploy:
     permissions:
@@ -84,3 +84,4 @@ jobs:
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          enable-oryx-build: true # ← this tells Oryx to install requirements.txt
