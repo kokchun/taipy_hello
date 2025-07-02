@@ -1,38 +1,32 @@
-# Docs for the Azure Web Apps Deploy action: https://go.microsoft.com/fwlink/?linkid=2134798
-# More GitHub Actions for Azure: https://go.microsoft.com/fwlink/?linkid=2135048
-
-name: Azure App Service - taipy-hello(Production), Build and deploy Python app
+name: Build & Deploy Taipy
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-    # checkout the repo
-    - name: 'Checkout Github Action'
-      uses: actions/checkout@master
+    - uses: actions/checkout@v3
 
-
-    - name: Set up Python version
-      uses: actions/setup-python@v1
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v4
       with:
-        python-version: '3.10'
+        python-version: '3.12'
 
-    - name: Build using AppService-Build
-      uses: azure/appservice-build@v2
-      with:
-        platform: python
-        platform-version: '3.10'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
 
-    - name: Run Azure webapp deploy action using publish profile credentials
+    - name: Archive app
+      run: zip -r taipy.zip .
+
+    - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
       with:
-        app-name: taipy-hello
-        slot-name: Production
-        publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_37F6EE7DBDA2435A944F7E8376DE5D15 }}
-
+        app-name: taipy-hello            # your Web App name
+        slot-name: production
+        package: taipy.zip
