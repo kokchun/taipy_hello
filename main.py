@@ -13,7 +13,7 @@ DATA_DIRECTORY = Path(__file__).parent / "data"
 df = pd.read_csv(
     DATA_DIRECTORY / "norway_new_car_sales_by_model.csv", encoding="latin-1"
 )
-
+# new deploy
 
 df_year = (
     duckdb.query(
