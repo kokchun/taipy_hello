@@ -36,7 +36,7 @@ properties = {
         title=dict(
             text="Sales per car brand in Norway from 2007 to 2016",
             font=dict(weight="bold", size=18, color=GRAY_1),
-            y = 1.1
+            y=1.1,
         ),
         xaxis=dict(
             showgrid=False,
@@ -72,9 +72,7 @@ chart_config = {
 with tgb.Page() as page:
     with tgb.part(class_name="container card"):
         tgb.text("# Line chart with tgb.chart()", mode="md")
-        with tgb.layout(
-            columns="1 1", gap="2rem"
-        ):
+        with tgb.layout(columns="1 1", gap="2rem"):
             with tgb.part() as line_chart:
                 tgb.text("## Line Chart", mode="md")
 
@@ -92,4 +90,4 @@ with tgb.Page() as page:
 
 
 if __name__ == "__main__":
-    Gui(page=page).run(port=8080, use_reloader=True, dark_mode=False)
+    Gui(page=page).run(port=8000, use_reloader=True, dark_mode=False)
