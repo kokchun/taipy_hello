@@ -76,7 +76,7 @@ with tgb.Page() as page:
             columns="1 1", gap="2rem"
         ):
             with tgb.part() as line_chart:
-                tgb.text("## Line chart", mode="md")
+                tgb.text("## Line Chart", mode="md")
 
                 tgb.chart(
                     "{df_year}",
